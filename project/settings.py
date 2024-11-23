@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Custom apps
+    'accounts',
     'djecrety', # generate secrets
-    'psycopg2', # connect to postgreSQL DB
+    'psycopg2', # connect to postgreSQL DB,
+    'users', # custom managers and user model
 ]
 
 MIDDLEWARE = [
@@ -66,7 +68,9 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            Path(f'{BASE_DIR}/accounts/templates/accounts')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Enable new custom user class for Django authentication
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 # Internationalization
